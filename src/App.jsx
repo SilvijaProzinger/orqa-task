@@ -1,12 +1,13 @@
 import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material/";
+import { Container, CssBaseline } from "@mui/material/";
 import "@fontsource/inter";
+import Employees from "./components/Employees";
 
 const theme = createTheme({
   palette: {
     background: {
-      default: "#FAF9F6",
+      default: "#FAF9F6", // fallback for gradient background color
       paper: "#F8F8F8",
     },
     primary: {
@@ -40,15 +41,26 @@ const theme = createTheme({
       fontFamily: "Inter",
     },
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          background: "linear-gradient(180deg, #8ECAE6, #FFF) no-repeat",
+          backgroundSize: "100% 20%",
+        },
+      },
+    },
+  },
 });
 
 function App() {
   return (
-    <>
+    <Container maxWidth="lg">
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Employees />
       </ThemeProvider>
-    </>
+    </Container>
   );
 }
 
