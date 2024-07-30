@@ -1,10 +1,16 @@
 import { Button, TableCell } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const EmployeesTableCell = ({ firstName, lastName, column, value }) => {
+const EmployeesTableCell = ({
+  firstName,
+  lastName,
+  employeeId,
+  column,
+  value,
+}) => {
   if (column.id === "imageUrl") {
     return (
-      <TableCell key={column.id} align={column.align}>
+      <TableCell key={`${employeeId}-${column.id}`} align={column.align}>
         {value ? (
           <img
             src={value}
@@ -25,9 +31,9 @@ const EmployeesTableCell = ({ firstName, lastName, column, value }) => {
 
   if (column.id === "akcija") {
     return (
-      <TableCell key={column.id} align={column.align}>
+      <TableCell key={`${employeeId}-${column.id}`} align={column.align}>
         <Button variant="contained">
-          <SearchIcon fontSize="small" sx={{marginRight: '5px'}}/>
+          <SearchIcon fontSize="small" sx={{ marginRight: "5px" }} />
           Pregled
         </Button>
       </TableCell>
@@ -35,7 +41,7 @@ const EmployeesTableCell = ({ firstName, lastName, column, value }) => {
   }
 
   return (
-    <TableCell key={column.id} align={column.align}>
+    <TableCell key={`${employeeId}-${column.id}`} align={column.align}>
       {value || "N/A"}
     </TableCell>
   );

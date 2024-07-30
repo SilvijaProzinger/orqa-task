@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -12,21 +12,28 @@ const apiUrl = import.meta.env.VITE_API_EMPLOYEES_API ?? "";
 const Employees = () => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  const [searchQuery, setSearchQuery] = useState("");
 
   const { employeesData, pageData, loading, error, fetchData } = useFetchData(
-    apiUrl,
-    4,
-    ""
+    apiUrl
   );
   const isInitalized = useRef(false);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   useEffect(() => {
     // add ref to stop useEffect from running twice in a row by default in strict mode (not necessary in production)
     if (!isInitalized.current) {
-      fetchData();
+      fetchData(searchQuery, 1);
       isInitalized.current = true;
     }
-  }, [fetchData]);
+  }, [fetchData, searchQuery]);
+
+  useEffect(() => {
+    if (searchQuery !== '') fetchData(searchQuery, 1)
+  },[searchQuery, fetchData])
 
   useEffect(() => {
     console.log(employeesData);
@@ -73,12 +80,12 @@ const Employees = () => {
             }}
           >
             <Typography variant="h4">Popis zaposlenika</Typography>
-            <Search disabled={loading} />
+            <Search disabled={loading} handleSearch={handleSearch} />
           </Box>
           {loading ? (
             <CircularProgress color="secondary" />
           ) : (
-            <EmployeesTable employees={employeesData}/>
+            <EmployeesTable employees={employeesData} />
           )}
         </Box>
       )}

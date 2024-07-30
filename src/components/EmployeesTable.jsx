@@ -65,14 +65,15 @@ const EmployeesList = ({ employees }) => {
         </TableHead>
         <TableBody>
           {employees.map((employee) => (
-            <TableRow hover tabIndex={-1} key={employee.id}>
+            <TableRow hover key={employee.id}>
               {columns.map((column) => {
                 const value = employee[column.id];
                 return (
                   <EmployeesTableCell
-                    key={employee.id}
+                    key={`${employee.key}-${column.id}`}
                     column={column}
                     value={value}
+                    employeeId={employee.id}
                     firstName={employee.firstName}
                     lastName={employee.lastName}
                   />

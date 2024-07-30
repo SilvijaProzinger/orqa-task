@@ -1,14 +1,29 @@
+import { useState, useEffect } from "react";
 import { TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import useDebounce from "../hooks/useDebounce";
 
-const Search = ({disabled}) => {
+const Search = ({ disabled, handleSearch }) => {
+  const [inputValue, setInputValue] = useState("");
+  const debouncedInputValue = useDebounce(inputValue, 500); 
+
+  useEffect(() => {
+    handleSearch(debouncedInputValue)
+  }, [debouncedInputValue, handleSearch]);
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <TextField
       disabled={disabled}
+      value={inputValue}
+      onChange={handleInputChange}
       size="small"
       variant="outlined"
       color="primary"
-      placeholder="Pretražite zaposlenike..."
+      placeholder="Pretražite po imenu ili prezimenu"
       sx={{
         "& .MuiInputBase-input": {
           color: "primary.dark",
