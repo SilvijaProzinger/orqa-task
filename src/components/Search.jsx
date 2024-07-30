@@ -1,9 +1,10 @@
 import { TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Search = () => {
+const Search = ({disabled}) => {
   return (
     <TextField
+      disabled={disabled}
       size="small"
       variant="outlined"
       color="primary"

@@ -7,7 +7,7 @@ const useFetchEmployees = (apiUrl, page, searchQuery) => {
     last_page: 0,
   });
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   // if the user uses search add search query to the url, if not get the base api url page per page
   const url = searchQuery
@@ -17,20 +17,25 @@ const useFetchEmployees = (apiUrl, page, searchQuery) => {
   const fetchData = useCallback(async () => {
     try {
       const res = await fetch(url);
-      const response = await res.json();
-      console.log(response);
-      setEmployeesData(response.data);
+      if (res.ok) {
+        const response = await res.json();
+        console.log(response);
+        setEmployeesData(response.data);
 
-      // add info about the page to know how many pages are there and how many data per page
-      setPageData((pageData) => ({
-        ...pageData,
-        per_page: response.per_page,
-        last_page: response.last_page,
-      }));
-      setError(null);
+        // add info about the page to know how many pages are there and how many data per page
+        setPageData((pageData) => ({
+          ...pageData,
+          per_page: response.per_page,
+          last_page: response.last_page,
+        }));
+        setError("");
+      } else
+        throw new Error(`HTTP error status: ${res.status} - ${res.statusText}`);
     } catch (err) {
       console.log(err);
-      setError(err);
+      setError(
+        "Došlo je do pogreške prilikom dohvaćanja podataka. Molimo pokušajte kasnije."
+      );
     }
     setLoading(false);
   }, [url]);
