@@ -17,8 +17,8 @@ const EmployeesTableCell = ({
             src={value}
             alt={`${firstName} ${lastName}`}
             style={{
-              width: "80px",
-              height: "80px",
+              width: "50px",
+              height: "50px",
               borderRadius: "50%",
               objectFit: "cover",
             }}

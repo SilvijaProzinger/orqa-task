@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import EmployeesTableCell from "./EmployeesTableCell";
 import EmployeeDetails from "./EmployeeDetails";
 
@@ -32,12 +32,15 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const EmployeesList = ({ employees }) => {
+const EmployeesTable = forwardRef(function EmployeesTable({ employees }, ref) {
   const [isEmployeeModalOpen, setIsEmployeeModalOpen] = useState(false);
   const [employeeDetailsObj, setEmployeeDetailsObj] = useState({});
 
   const openEmployeeModal = (clickedEmployeeId) => {
-    const selectedEmployee = employees.find((employee) => employee.id === clickedEmployeeId);
+    // select the employee object to display in employee details modal
+    const selectedEmployee = employees.find(
+      (employee) => employee.id === clickedEmployeeId
+    );
     setEmployeeDetailsObj(selectedEmployee);
     setIsEmployeeModalOpen(true);
   };
@@ -48,6 +51,7 @@ const EmployeesList = ({ employees }) => {
 
   return (
     <TableContainer
+      ref={ref}
       component={Paper}
       sx={{
         maxHeight: 600,
@@ -102,6 +106,6 @@ const EmployeesList = ({ employees }) => {
       />
     </TableContainer>
   );
-};
+});
 
-export default EmployeesList;
+export default EmployeesTable;

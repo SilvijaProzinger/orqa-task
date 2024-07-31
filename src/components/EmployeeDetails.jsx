@@ -37,7 +37,7 @@ const EmployeeDetails = ({ isEmployeeModalOpen, employeeDetails, onClose }) => {
                 py={0.5}
                 px={1}
                 mt={0.5}
-                sx={{ backgroundColor: "primary.light", borderRadius: "15px" }}
+                sx={{ backgroundColor: "primary.light", borderRadius: "15px", width: 'fit-content' }}
               >
                 {" "}
                 <Typography variant="body2" color="white">
