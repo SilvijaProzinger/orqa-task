@@ -7,6 +7,7 @@ const EmployeesTableCell = ({
   employeeId,
   column,
   value,
+  openEmployeeModal
 }) => {
   if (column.id === "imageUrl") {
     return (
@@ -32,7 +33,7 @@ const EmployeesTableCell = ({
   if (column.id === "akcija") {
     return (
       <TableCell key={`${employeeId}-${column.id}`} align={column.align}>
-        <Button variant="contained">
+        <Button variant="contained" onClick={() => openEmployeeModal(employeeId)}>
           <SearchIcon fontSize="small" sx={{ marginRight: "5px" }} />
           Pregled
         </Button>

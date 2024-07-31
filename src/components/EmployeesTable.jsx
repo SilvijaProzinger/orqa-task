@@ -7,10 +7,12 @@ import {
   TableHead,
   TableCell,
   tableCellClasses,
+  Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import EmployeesTableCell from "./EmployeesTableCell";
+import EmployeeDetails from "./EmployeeDetails";
 
 const columns = [
   { id: "id", label: "#", minWidth: 50 },
@@ -32,8 +34,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const EmployeesList = ({ employees }) => {
   const [isEmployeeModalOpen, setIsEmployeeModalOpen] = useState(false);
+  const [employeeDetailsObj, setEmployeeDetailsObj] = useState({});
 
-  const openEmployeeModal = () => {
+  const openEmployeeModal = (clickedEmployeeId) => {
+    const selectedEmployee = employees.find((employee) => employee.id === clickedEmployeeId);
+    setEmployeeDetailsObj(selectedEmployee);
     setIsEmployeeModalOpen(true);
   };
 
@@ -63,26 +68,38 @@ const EmployeesList = ({ employees }) => {
             ))}
           </TableRow>
         </TableHead>
-        <TableBody>
-          {employees.map((employee) => (
-            <TableRow hover key={employee.id}>
-              {columns.map((column) => {
-                const value = employee[column.id];
-                return (
-                  <EmployeesTableCell
-                    key={`${employee.key}-${column.id}`}
-                    column={column}
-                    value={value}
-                    employeeId={employee.id}
-                    firstName={employee.firstName}
-                    lastName={employee.lastName}
-                  />
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableBody>
+        {employees.length === 0 ? (
+          <Typography p={2} color="text.secondary">
+            Nema podataka za prikaz.
+          </Typography>
+        ) : (
+          <TableBody>
+            {employees.map((employee) => (
+              <TableRow hover key={employee.id}>
+                {columns.map((column) => {
+                  const value = employee[column.id];
+                  return (
+                    <EmployeesTableCell
+                      key={`${employee.key}-${column.id}`}
+                      column={column}
+                      value={value}
+                      employeeId={employee.id}
+                      firstName={employee.firstName}
+                      lastName={employee.lastName}
+                      openEmployeeModal={openEmployeeModal}
+                    />
+                  );
+                })}
+              </TableRow>
+            ))}
+          </TableBody>
+        )}
       </Table>
+      <EmployeeDetails
+        employeeDetails={employeeDetailsObj}
+        onClose={closeEmployeeModal}
+        isEmployeeModalOpen={isEmployeeModalOpen}
+      />
     </TableContainer>
   );
 };

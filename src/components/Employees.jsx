@@ -40,7 +40,7 @@ const Employees = () => {
 
   return (
     <Box
-      my={4}
+      my={6}
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Typography variant="h1" m={2}>
