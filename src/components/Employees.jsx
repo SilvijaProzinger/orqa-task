@@ -17,7 +17,7 @@ const Employees = () => {
   const { employeesData, pageData, loading, error, fetchData } = useFetchData(
     apiUrl
   );
-  const isInitalized = useRef(false);
+  const isInitialized = useRef(false);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -25,15 +25,13 @@ const Employees = () => {
 
   useEffect(() => {
     // add ref to stop useEffect from running twice in a row by default in strict mode (not necessary in production)
-    if (!isInitalized.current) {
-      fetchData(searchQuery, 1);
-      isInitalized.current = true;
+    if (!isInitialized.current) {
+      fetchData("", 1);
+      isInitialized.current = true;
+    } else {
+      fetchData(searchQuery, 1); 
     }
   }, [fetchData, searchQuery]);
-
-  useEffect(() => {
-    if (searchQuery !== '') fetchData(searchQuery, 1)
-  },[searchQuery, fetchData])
 
   useEffect(() => {
     console.log(employeesData);
