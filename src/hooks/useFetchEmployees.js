@@ -1,9 +1,10 @@
 import { useState, useCallback } from "react";
 
-const useFetchEmployees = (apiUrl, initialSearch = '', initialPage = 1) => {
+const useFetchEmployees = (apiUrl, initialSearch = "", initialPage = 1) => {
   const [employeesData, setEmployeesData] = useState([]);
   const [pageData, setPageData] = useState({
     per_page: 0,
+    current_page: 0,
     last_page: 0,
   });
   const [loading, setLoading] = useState(true);
@@ -22,12 +23,21 @@ const useFetchEmployees = (apiUrl, initialSearch = '', initialPage = 1) => {
         if (res.ok) {
           const response = await res.json();
           console.log(response);
-          setEmployeesData(response.data);
-
-          // add info about the page to know how many pages are there and how many data per page
+          
+          // if the user is searching only show data that fits the search and not the previous data
+          if (searchQuery) { 
+            setEmployeesData(response.data);
+          } else {
+            setEmployeesData((prevEmployees) => [
+              ...prevEmployees,
+              ...response.data,
+            ]);
+          }
+          // add info about the page to know how many pages are there and how much data per page
           setPageData((pageData) => ({
             ...pageData,
             per_page: response.per_page,
+            current_page: response.current_page,
             last_page: response.last_page,
           }));
           setError("");
