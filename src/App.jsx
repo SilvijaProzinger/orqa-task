@@ -1,8 +1,11 @@
-import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container, CssBaseline } from "@mui/material/";
-import "@fontsource/inter";
 import Employees from "./components/Employees";
+import Chart from "./components/Chart";
+import Home from "./components/Home";
+import "./App.css";
+import "@fontsource/inter";
 
 const theme = createTheme({
   palette: {
@@ -40,12 +43,19 @@ const theme = createTheme({
     allVariants: {
       fontFamily: "Inter",
     },
+    h1: {
+      fontSize: '3rem'
+    },
+    h2: {
+      fontSize: '2.5rem'
+    }
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          background: "linear-gradient(180deg, rgba(142, 202, 230, 0.6), rgba(255, 255, 255, 1)) no-repeat",
+          background:
+            "linear-gradient(180deg, rgba(142, 202, 230, 0.6), rgba(255, 255, 255, 1)) no-repeat",
           backgroundSize: "100% 20%",
         },
       },
@@ -58,7 +68,13 @@ function App() {
     <Container maxWidth="lg">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Employees />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/zaposlenici" element={<Employees />} />
+            <Route path="/dijagram" element={<Chart />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </Container>
   );
