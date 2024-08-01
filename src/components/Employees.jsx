@@ -33,11 +33,6 @@ const Employees = () => {
     }
   }, [isInitialized, fetchData, searchQuery]);
 
-  useEffect(() => {
-    console.log(employeesData);
-    console.log(pageData);
-  }, [employeesData, pageData]);
-
   // call fetchData when the user triggers scroll to bottom, but wrapped in a debounce so that the api call doesn't get triggered too fast
   const tableScrollListener = useDebounceScrollListener(() => {
     if (!bottomTableRef.current || loading) return;
