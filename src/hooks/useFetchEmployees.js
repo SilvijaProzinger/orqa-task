@@ -16,12 +16,10 @@ const useFetchEmployees = (apiUrl, initialSearch = null, initialPage = 1) => {
         ? `${apiUrl}?search=${searchQuery}&page=${page}`
         : `${apiUrl}?page=${page}`;
 
-      console.log(url);
       try {
         const res = await fetch(url);
         if (res.ok) {
           const response = await res.json();
-          console.log(response);
           
           // if the user triggered a new search only show the data that fits the search and not the previous data
           if (isNewSearch) { 
