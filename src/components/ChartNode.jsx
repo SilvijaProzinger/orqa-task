@@ -13,8 +13,12 @@ const ChartNode = ({ node }) => {
           objectFit: "cover",
         }}
       />
-      <Typography variant="body" sx={{display: 'block'}}>{node.name}</Typography>
-      <Typography variant="body2" color="text.secondary">{node.position}</Typography>
+      <Typography variant="body" sx={{ display: "block" }}>
+        {node.name}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        {node.position}
+      </Typography>
     </Box>
   );
 };
