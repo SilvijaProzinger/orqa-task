@@ -5,11 +5,12 @@ import { Typography, Box, CircularProgress } from "@mui/material";
 import useFetchEmployees from "../hooks/useFetchEmployees";
 import ChartNode from "./ChartNode";
 import ChartIntro from "./ChartIntro";
+import useBuildChart from "../hooks/useBuildChart";
 
 const apiUrl = import.meta.env.VITE_API_EMPLOYEES_API ?? "";
 
 const Chart = () => {
-  const { employeesData, pageData, fetchData } = useFetchEmployees(apiUrl);
+  const { employeesData, fetchData } = useFetchEmployees(apiUrl);
   const isInitialized = useRef(false);
 
   const fetchAllData = useCallback(async () => {
@@ -17,13 +18,11 @@ const Chart = () => {
     let lastPage = 5;
 
     while (currentPage <= lastPage) {
-      console.log(currentPage);
       await fetchData("", currentPage, false);
       currentPage++;
       await new Promise((resolve) => setTimeout(resolve, 200));
-      console.log(`Fetching page: ${currentPage} of ${pageData.last_page}`);
     }
-  }, [fetchData, pageData.last_page]);
+  }, [fetchData]);
 
   useEffect(() => {
     if (!isInitialized.current) {
@@ -32,44 +31,8 @@ const Chart = () => {
     }
   }, [fetchAllData]);
 
-  // build hierarchy of data to pass through to our node
-  const buildHierarchy = (data) => {
-    const topLevel = data.find(
-      (employee) => employee.position.toLowerCase() === "ceo"
-    );
-
-    if (!topLevel) {
-      return null;
-    }
-
-    const secondLevel = data.filter(
-      (employee) =>
-        employee.position.toLowerCase().includes("manager") ||
-        employee.position.toLowerCase().includes("director")
-    );
-
-    const thirdLevel = data.filter(
-      (employee) =>
-        !employee.position.toLowerCase().includes("manager") &&
-        !employee.position.toLowerCase().includes("ceo")
-    );
-
-    return {
-      ...topLevel,
-      name: `${topLevel.firstName} ${topLevel.lastName}`,
-      children: secondLevel.map((manager) => ({
-        ...manager,
-        name: `${manager.firstName} ${manager.lastName}`,
-        children: thirdLevel.map((employee) => ({
-          ...employee,
-          name: `${employee.firstName} ${employee.lastName}`,
-        })),
-      })),
-    };
-  };
-
   // convert api response data to organizational chart hierarchy
-  const hierarchyData = buildHierarchy(employeesData);
+  const hierarchyData = useBuildChart(employeesData);
 
   return (
     <Box

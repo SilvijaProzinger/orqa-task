@@ -2,7 +2,6 @@ import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Typography,
-  Paper,
   Link,
   Card,
   CardContent,
@@ -14,7 +13,6 @@ import SchemaIcon from "@mui/icons-material/Schema";
 const HomePagesList = () => {
   return (
     <Box
-      component={Paper}
       p={6}
       m={6}
       sx={{
@@ -23,8 +21,6 @@ const HomePagesList = () => {
         alignItems: "center",
         flexWrap: "wrap",
         gap: "2rem",
-        borderRadius: "10px",
-        boxShadow: "0 0 12px 8px rgba(142, 202, 230, 0.3)",
       }}
     >
       <Card sx={{ maxWidth: 400, boxShadow: 3, backgroundColor: "white" }}>
