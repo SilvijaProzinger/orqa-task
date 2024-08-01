@@ -5,7 +5,7 @@ import useDebounce from "../hooks/useDebounce";
 
 const Search = ({ disabled, handleSearch }) => {
   const [inputValue, setInputValue] = useState("");
-  const debouncedInputValue = useDebounce(inputValue, 400);
+  const debouncedInputValue = useDebounce(inputValue, 300);
 
   useEffect(() => {
     handleSearch(debouncedInputValue);
