@@ -1,6 +1,6 @@
 # Employee table and chart
 
-This is a web app that displays a table list of employees with infinite scroll, fetched from a locally served API. It allows the user to search for employees by name and displays a graph which shows the hierarchy of employees based on position. It was made in React (Vite), styled with Material-UI and uses react-orgchart to display the chart. The data is served on a local API run by Docker Desktop, that can be found on `http://localhost:8000/api/employees`, which my app connects to with api url saved in `.env` file. 
+This is a web app that displays a table list of employees with infinite scroll, fetched from a locally served API. It allows the user to search for employees by name and displays a graph which shows the hierarchy of employees based on position. It was made in React (Vite), styled with Material-UI and uses react-orgchart to display the chart. The data is served on a local API run by Docker Desktop, that can be found at `http://localhost:8000/api/employees`, which my app connects to with api url saved in `.env` file. 
 
 ## Features
 
