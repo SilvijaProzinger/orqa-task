@@ -6,3 +6,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.reactOrgChart {
+  width: 100% !important;
+}
