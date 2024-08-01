@@ -7,20 +7,11 @@ const EmployeesIntro = () => {
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <Box sx={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
       <Typography variant="h1" m={2}>
         Zaposlenici
       </Typography>
       <Typography
-        my={1}
         sx={{ width: isDesktop ? "50%" : "100%", textAlign: "center" }}
       >
         Ovdje možete vidjeti{" "}

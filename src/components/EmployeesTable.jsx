@@ -8,6 +8,8 @@ import {
   TableCell,
   tableCellClasses,
   Typography,
+  Skeleton,
+  Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { forwardRef, useState } from "react";
@@ -32,7 +34,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const EmployeesTable = forwardRef(function EmployeesTable({ employees }, ref) {
+const EmployeesTable = forwardRef(function EmployeesTable({ employees, loading }, ref) {
   const [isEmployeeModalOpen, setIsEmployeeModalOpen] = useState(false);
   const [employeeDetailsObj, setEmployeeDetailsObj] = useState({});
 
@@ -99,6 +101,16 @@ const EmployeesTable = forwardRef(function EmployeesTable({ employees }, ref) {
           </TableBody>
         )}
       </Table>
+      {loading && (
+        <Box>
+          <Skeleton
+            width="100%"
+            variant="rectangular"
+            height="50px"
+            animation="wave"
+          />
+        </Box>
+      )}
       <EmployeeDetails
         employeeDetails={employeeDetailsObj}
         onClose={closeEmployeeModal}
