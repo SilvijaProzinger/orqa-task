@@ -1,5 +1,13 @@
 import { Link as RouterLink } from "react-router-dom";
-import { Box, Typography, Paper, Link } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Paper,
+  Link,
+  Card,
+  CardContent,
+  CardMedia,
+} from "@mui/material";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import SchemaIcon from "@mui/icons-material/Schema";
 
@@ -13,107 +21,125 @@ const HomePagesList = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        flexWrap: 'wrap',
+        flexWrap: "wrap",
         gap: "2rem",
         borderRadius: "10px",
         boxShadow: "0 0 12px 8px rgba(142, 202, 230, 0.3)",
       }}
     >
-      <Box
-        component={Paper}
-        p={2}
-        sx={{ backgroundColor: "white", maxWidth: "400px" }}
-      >
-        {" "}
-        <AssignmentIndIcon
-          color="primary"
-          sx={{
-            fontSize: "4rem",
-            border: "1px solid primary",
-            borderRadius: "50%",
-          }}
-        />
-        <Typography variant="h2" color="primary" mb={0.5}>
-          Zaposlenici
-        </Typography>
-        <Box
+      <Card sx={{ maxWidth: 400, boxShadow: 3, backgroundColor: "white" }}>
+        <CardMedia
+          component="div"
           sx={{
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
-            gap: "2rem",
+            justifyContent: "center",
+            height: 100,
+            borderBottom: "1px solid #e0e0e0",
+            backgroundColor: "#219EBC",
           }}
         >
-          <Typography color="text.secondary">
+          <AssignmentIndIcon
+            sx={{
+              fontSize: "4rem",
+              border: "1px solid",
+              borderColor: "white",
+              borderRadius: "50%",
+              padding: "10px",
+              color: "white",
+            }}
+          />
+        </CardMedia>
+        <CardContent>
+          <Typography variant="h2" color="primary" mb={1}>
+            Zaposlenici
+          </Typography>
+          <Typography color="text.secondary" paragraph>
             Pregledajte popis zaposlenika i pretražite zaposlenike po imenu.
           </Typography>
-          <Link
-            component={RouterLink}
-            to="/zaposlenici"
-            py={1}
-            px={2}
+          <Box
             sx={{
-              border: "1px solid #8ECAE6",
-              borderRadius: "10px",
-              textDecoration: "none",
-              "&:hover": {
-                color: "#023047",
-                border: "1px solid #023047",
-              },
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            Vidi zaposlenike
-          </Link>
-        </Box>
-      </Box>
-      <Box
-        component={Paper}
-        p={2}
-        sx={{ backgroundColor: "white", maxWidth: "400px" }}
-      >
-        {" "}
-        <SchemaIcon
-          color="primary"
-          sx={{
-            fontSize: "4rem",
-            border: "1px solid primary",
-            borderRadius: "50%",
-          }}
-        />
-        <Typography variant="h2" color="primary" mb={0.5}>
-          Dijagram
-        </Typography>
-        <Box
+            <Link
+              component={RouterLink}
+              to="/zaposlenici"
+              py={1}
+              px={2}
+              sx={{
+                border: "1px solid #8ECAE6",
+                borderRadius: "10px",
+                textDecoration: "none",
+                "&:hover": {
+                  color: "#023047",
+                  border: "1px solid #023047",
+                },
+              }}
+            >
+              Vidi zaposlenike
+            </Link>
+          </Box>
+        </CardContent>
+      </Card>
+      <Card sx={{ maxWidth: 400, boxShadow: 3, backgroundColor: "white" }}>
+        <CardMedia
+          component="div"
           sx={{
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
-            gap: "2rem",
+            justifyContent: "center",
+            height: 100,
+            borderBottom: "1px solid #e0e0e0",
+            backgroundColor: "#219EBC",
           }}
         >
-          <Typography color="text.secondary">
+          <SchemaIcon
+            sx={{
+              fontSize: "4rem",
+              border: "1px solid",
+              borderColor: "white",
+              borderRadius: "50%",
+              padding: "10px",
+              color: "white",
+            }}
+          />
+        </CardMedia>
+        <CardContent>
+          <Typography variant="h2" color="primary" mb={1}>
+            Dijagram
+          </Typography>
+          <Typography color="text.secondary" paragraph>
             Pregledajte dijagram sa hijerarhijskim prikazom zaposlenika prema
             poziciji.
           </Typography>
-          <Link
-            component={RouterLink}
-            to="/dijagram"
-            py={1}
-            px={2}
+          <Box
             sx={{
-              border: "1px solid #8ECAE6",
-              borderRadius: "10px",
-              textDecoration: "none",
-              "&:hover": {
-                color: "#023047",
-                border: "1px solid #023047",
-              },
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            Vidi dijagram
-          </Link>
-        </Box>
-      </Box>
+            <Link
+              component={RouterLink}
+              to="/dijagram"
+              py={1}
+              px={2}
+              sx={{
+                border: "1px solid #8ECAE6",
+                borderRadius: "10px",
+                textDecoration: "none",
+                "&:hover": {
+                  color: "#023047",
+                  border: "1px solid #023047",
+                },
+              }}
+            >
+              Vidi dijagram
+            </Link>
+          </Box>
+        </CardContent>
+      </Card>
     </Box>
   );
 };
